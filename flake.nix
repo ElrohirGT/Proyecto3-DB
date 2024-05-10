@@ -19,7 +19,7 @@
         };
         naersk-lib = pkgs.callPackage naersk {};
       in {
-        defaultPackage = naersk-lib.buildPackage ./.;
+        defaultPackage = naersk-lib.buildPackage ./db_innit;
         devShell = with pkgs;
           mkShell {
             buildInputs = [
