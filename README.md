@@ -41,7 +41,7 @@ Knime se conecta a ambas bases de datos Oracle para obtener sus datos, transform
 
 Finalmente los contenidos en el la vista expuesta por la OLAP en postgres son consumidos por dos clientes de Bussiness Inteligence, Tableu y PowerBI. Ambos implementan el mismo dashboard de estadísticas y a continuación haremos una comparativa de ambos.
 
-## Criterios a Evaluar
+## PowerBI vs Tableu
 
 <!-- Preguntas que deben ser respondidas en el informe -->
 
