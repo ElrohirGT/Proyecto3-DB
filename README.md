@@ -13,7 +13,14 @@
 
 ## Descripción General
 
-<!-- ¿Cómo se hizo el proyecto? -->
+El proyecto pedía intentar simular de forma fidedigna la situación de la tienda consumidora. Para el cual se realizaron 2 bases de datos dispuestas en la Oracle Cloud, las cuales nos sirven de nuestras OLTPs y representan las bases de datos transaccionales de uso diario dentro de las sucursales del negocio. Mientras que la OLAP fue implementada por medio de una base de datos Postgres montada en Vercel. Ambas opciones tienen una generosa tier gratuita, la cual utilizamos después de experimentar un poco con AWS.
+
+Knime se conecta a ambas bases de datos Oracle para obtener sus datos, transformarlos e insertarlos a la OLTP. El método por el cuál se realiza esta operación es por medio del nodo [`db-merge`](https://hub.knime.com/knime/extensions/org.knime.features.database/latest/org.knime.database.node.io.merge.DBMergeNodeFactory). Esto significa que la data que entra a la OLAP nunca es borrada, esto tiene dos implicaciones respecto al diseño de las OLTPs:
+
+1. La OLAP en postgres siempre contendrá data aunque su data de origen ya se haya borrado en las OLTPs de Oracle.
+1. Si se desea soportar la "eliminación" de registros, se debe agregar un campo extra que indique si el registro ya fue borrado o no, y de esta forma se pueda filtrar solo por lo que no han sido borrados.
+
+Finalmente los contenidos en el la vista expuesta por la OLAP en postgres son consumidos por dos clientes de Bussiness Inteligence, Tableu y PowerBI. Ambos implementan el mismo dashboard de estadísticas y a continuación haremos una comparativa de ambos.
 
 ## Criterios a Evaluar
 
