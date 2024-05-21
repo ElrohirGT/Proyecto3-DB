@@ -13,6 +13,25 @@
 
 ## Descripción General
 
+```mermaid
+---
+title: Interacción general de las herramientas
+---
+
+stateDiagram-v2 
+    direction LR
+    [*]-->Cliente
+    Cliente --> Shop1_Oracle
+    Cliente --> Shop2_Oracle
+
+    Shop1_Oracle --> Knime
+    Shop2_Oracle --> Knime
+
+    Knime --> Datawarehouse_PostgreSQL
+    Datawarehouse_PostgreSQL --> PowerBi
+    Datawarehouse_PostgreSQL --> Tableu
+```
+
 El proyecto pedía intentar simular de forma fidedigna la situación de la tienda consumidora. Para el cual se realizaron 2 bases de datos dispuestas en la Oracle Cloud, las cuales nos sirven de nuestras OLTPs y representan las bases de datos transaccionales de uso diario dentro de las sucursales del negocio. Mientras que la OLAP fue implementada por medio de una base de datos Postgres montada en Vercel. Ambas opciones tienen una generosa tier gratuita, la cual utilizamos después de experimentar un poco con AWS.
 
 Knime se conecta a ambas bases de datos Oracle para obtener sus datos, transformarlos e insertarlos a la OLTP. El método por el cuál se realiza esta operación es por medio del nodo [`db-merge`](https://hub.knime.com/knime/extensions/org.knime.features.database/latest/org.knime.database.node.io.merge.DBMergeNodeFactory). Esto significa que la data que entra a la OLAP nunca es borrada, esto tiene dos implicaciones respecto al diseño de las OLTPs:
