@@ -47,6 +47,8 @@ Finalmente los contenidos en el la vista expuesta por la OLAP en postgres son co
 
 **¿Qué diferencias observa con respecto al modelo transaccional?**
 
+El datamart se diferencia del modelo transaccional en diferentes maneras. La primera diferencia que se puede encontrar es que en el modelo estrella se hace una desnormalización de las tablas, que demuestra una generalización de los datos sin llegar a ser muy específico. En el datamart tenemos una tabla de hechos y cinco tablas de dimensiones, estas relaciones no existen en el modelo transaccional y obtienen los datos más relevantes; la tabla de hechos hace referencia (foreign keys) a las tablas de dimensiones que a diferencia del otro modelo que no hace referencia de una tabla a todas las demás, al estar normalizada. 
+
 **¿Resultó factible replicar los tableros y funcionalidades de una herramienta a otra?**
 
 Sí fue posible, se escogieron tipos de gráficos que existen en ambas herramientas para hacer los dashboards desde la etapa de diseño, así que el traducir de Power BI y Tableu
